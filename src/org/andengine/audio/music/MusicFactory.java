@@ -88,7 +88,6 @@ public class MusicFactory {
 
 	public static Music createMusicFromResource(final MusicManager pMusicManager, final Context pContext, final int pMusicResID) throws IOException {
 		final MediaPlayer mediaPlayer = MediaPlayer.create(pContext, pMusicResID);
-		mediaPlayer.prepare();
 
 		final Music music = new Music(pMusicManager, mediaPlayer);
 		pMusicManager.add(music);
