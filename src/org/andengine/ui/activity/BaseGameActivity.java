@@ -28,6 +28,7 @@ import org.andengine.util.debug.Debug;
 import org.andengine.util.system.SystemUtils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -63,6 +64,8 @@ public abstract class BaseGameActivity extends BaseActivity implements IGameInte
 	private boolean mCreateGameCalled;
 	private boolean mOnReloadResourcesScheduled;
 
+	private boolean mPartialPause = false; // Añadido por Sergio. Si es true, al ejecutarse el onStop no para el RenderSurfaceView y al volver no se ve parado el juego
+	
 	// ===========================================================
 	// Constructors
 	// ===========================================================
@@ -209,10 +212,26 @@ public abstract class BaseGameActivity extends BaseActivity implements IGameInte
 
 		super.onResume();
 
+		// Sergio: He movido este código al método "onResumeStep2"
+		/*this.acquireWakeLock();
+		this.mRenderSurfaceView.onResume();*/
+		if(!mPartialPause){
+			onResumeStep2();
+		}
+		
+		mPartialPause = false;
+	}
+
+	// Añadido por Sergio
+	protected void onResumeStep2(){
+		if(BuildConfig.DEBUG) {
+			Debug.d(this.getClass().getSimpleName() + ".onResumeStep2" + " @(Thread: '" + Thread.currentThread().getName() + "')");
+		}
+		
 		this.acquireWakeLock();
 		this.mRenderSurfaceView.onResume();
 	}
-
+	
 	@Override
 	public synchronized void onResumeGame() {
 		if(BuildConfig.DEBUG) {
@@ -250,14 +269,44 @@ public abstract class BaseGameActivity extends BaseActivity implements IGameInte
 
 		super.onPause();
 
-		this.mRenderSurfaceView.onPause();
-		this.releaseWakeLock();
+		// Sergio: He movido este código al método "onPauseStep2"
+		/*this.mRenderSurfaceView.onPause();
+		this.releaseWakeLock();*/
+		if(!mPartialPause){
+			onPauseStep2();
+		}
 
 		if(!this.mGamePaused) {
 			this.onPauseGame();
 		}
 	}
 
+	// Añadido por Sergio
+	protected void onPauseStep2(){
+		if(BuildConfig.DEBUG) {
+			Debug.d(this.getClass().getSimpleName() + ".onPauseStep2" + " @(Thread: '" + Thread.currentThread().getName() + "')");
+		}
+		
+		this.mRenderSurfaceView.onPause();
+		this.releaseWakeLock();
+	}
+	
+	// Añadido por Sergio
+	@Override
+	protected void onStop() {		
+		// Si no hemos hecho la pausa completa, la hacemos antes de ejecutar el onStop
+		if(mPartialPause){
+			mPartialPause = false;
+			onPauseStep2();
+		}
+		
+		if(BuildConfig.DEBUG) {
+			Debug.d(this.getClass().getSimpleName() + ".onStop" + " @(Thread: '" + Thread.currentThread().getName() + "')");
+		}
+		
+		super.onStop();
+	}
+	
 	@Override
 	public synchronized void onPauseGame() {
 		if(BuildConfig.DEBUG) {
@@ -366,6 +415,23 @@ public abstract class BaseGameActivity extends BaseActivity implements IGameInte
 	// Methods
 	// ===========================================================
 
+	// Añadido por Sergio
+	public void startActivityPausingPartially(Intent intent) {
+		mPartialPause = true;
+		super.startActivity(intent);
+	}
+	
+	// Añadido por Sergio
+	public void startActivityForResultPausingPartially(Intent intent, int requestCode) {
+		mPartialPause = true;
+		super.startActivityForResult(intent, requestCode);
+	}
+	
+	//Añadido por Sergio
+	public void setNextPauseAsPartial(){
+		mPartialPause = true;
+	}
+	
 	private void callGameResumedOnUIThread() {
 		BaseGameActivity.this.runOnUiThread(new Runnable() {
 			@Override
