@@ -64,7 +64,7 @@ public abstract class BaseGameActivity extends BaseActivity implements IGameInte
 	private boolean mCreateGameCalled;
 	private boolean mOnReloadResourcesScheduled;
 
-	private boolean mPartialPause = false; // Añadido por Sergio. Si es true, al ejecutarse el onStop no para el RenderSurfaceView y al volver no se ve parado el juego
+	private boolean mPartialPause = false; // AÃ±adido por Sergio. Si es true, al ejecutarse el onStop no para el RenderSurfaceView y al volver no se ve parado el juego
 	
 	// ===========================================================
 	// Constructors
@@ -212,7 +212,7 @@ public abstract class BaseGameActivity extends BaseActivity implements IGameInte
 
 		super.onResume();
 
-		// Sergio: He movido este código al método "onResumeStep2"
+		// Sergio: He movido este codigo al metodo "onResumeStep2"
 		/*this.acquireWakeLock();
 		this.mRenderSurfaceView.onResume();*/
 		if(!mPartialPause){
@@ -222,7 +222,7 @@ public abstract class BaseGameActivity extends BaseActivity implements IGameInte
 		mPartialPause = false;
 	}
 
-	// Añadido por Sergio
+	// AÃ±adido por Sergio
 	protected void onResumeStep2(){
 		if(BuildConfig.DEBUG) {
 			Debug.d(this.getClass().getSimpleName() + ".onResumeStep2" + " @(Thread: '" + Thread.currentThread().getName() + "')");
@@ -269,7 +269,7 @@ public abstract class BaseGameActivity extends BaseActivity implements IGameInte
 
 		super.onPause();
 
-		// Sergio: He movido este código al método "onPauseStep2"
+		// Sergio: He movido este codigo al metodo "onPauseStep2"
 		/*this.mRenderSurfaceView.onPause();
 		this.releaseWakeLock();*/
 		if(!mPartialPause){
@@ -281,7 +281,7 @@ public abstract class BaseGameActivity extends BaseActivity implements IGameInte
 		}
 	}
 
-	// Añadido por Sergio
+	// AÃ±adido por Sergio
 	protected void onPauseStep2(){
 		if(BuildConfig.DEBUG) {
 			Debug.d(this.getClass().getSimpleName() + ".onPauseStep2" + " @(Thread: '" + Thread.currentThread().getName() + "')");
@@ -291,7 +291,7 @@ public abstract class BaseGameActivity extends BaseActivity implements IGameInte
 		this.releaseWakeLock();
 	}
 	
-	// Añadido por Sergio
+	// AÃ±adido por Sergio
 	@Override
 	protected void onStop() {		
 		// Si no hemos hecho la pausa completa, la hacemos antes de ejecutar el onStop
@@ -415,19 +415,19 @@ public abstract class BaseGameActivity extends BaseActivity implements IGameInte
 	// Methods
 	// ===========================================================
 
-	// Añadido por Sergio
+	// AÃ±adido por Sergio
 	public void startActivityPausingPartially(Intent intent) {
 		mPartialPause = true;
 		super.startActivity(intent);
 	}
 	
-	// Añadido por Sergio
+	// AÃ±adido por Sergio
 	public void startActivityForResultPausingPartially(Intent intent, int requestCode) {
 		mPartialPause = true;
 		super.startActivityForResult(intent, requestCode);
 	}
 	
-	//Añadido por Sergio
+	//AÃ±adido por Sergio
 	public void setNextPauseAsPartial(){
 		mPartialPause = true;
 	}
