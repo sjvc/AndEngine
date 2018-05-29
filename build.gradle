@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
     }
 
     dependencies {
@@ -8,11 +9,12 @@ buildscript {
     }
 }
 
+
 apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
