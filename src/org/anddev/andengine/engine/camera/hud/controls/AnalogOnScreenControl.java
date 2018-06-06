@@ -8,7 +8,7 @@ import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.util.MathUtils;
 import org.anddev.andengine.util.constants.TimeConstants;
 
-import android.util.FloatMath;
+
 
 /**
  * (c) 2010 Nicolas Gramlich 
@@ -80,7 +80,7 @@ public class AnalogOnScreenControl extends BaseOnScreenControl implements TimeCo
 			super.onUpdateControlKnob(pRelativeX, pRelativeY);
 		} else {
 			final float angleRad = MathUtils.atan2(pRelativeY, pRelativeX);
-			super.onUpdateControlKnob(FloatMath.cos(angleRad) * 0.5f, FloatMath.sin(angleRad) * 0.5f);
+			super.onUpdateControlKnob((float)Math.cos(angleRad) * 0.5f, (float)Math.sin(angleRad) * 0.5f);
 		}
 	}
 

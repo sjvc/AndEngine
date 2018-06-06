@@ -2,7 +2,7 @@ package org.anddev.andengine.util.modifier.ease;
 
 import org.anddev.andengine.util.constants.MathConstants;
 
-import android.util.FloatMath;
+
 
 /**
  * (c) 2010 Nicolas Gramlich
@@ -56,7 +56,7 @@ public class EaseSineOut implements IEaseFunction, MathConstants {
 	// ===========================================================
 
 	public static float getValue(final float pPercentage) {
-		return FloatMath.sin(pPercentage * PI_HALF);
+		return (float)Math.sin(pPercentage * PI_HALF);
 	}
 
 	// ===========================================================

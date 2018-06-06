@@ -2,7 +2,7 @@ package org.anddev.andengine.util.path.astar;
 
 import org.anddev.andengine.util.path.ITiledMap;
 
-import android.util.FloatMath;
+
 
 /**
  * (c) 2010 Nicolas Gramlich 
@@ -37,7 +37,7 @@ public class EuclideanHeuristic<T> implements IAStarHeuristic<T> {
 		final float dX = pTileToX - pTileFromX;
 		final float dY = pTileToY - pTileFromY;
 
-		return FloatMath.sqrt(dX * dX + dY * dY);
+		return (float)Math.sqrt(dX * dX + dY * dY);
 	}
 
 	// ===========================================================

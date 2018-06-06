@@ -1,6 +1,6 @@
 package org.anddev.andengine.util;
 
-import android.util.FloatMath;
+
 
 
 /**
@@ -144,8 +144,8 @@ public class Transformation {
 	public void preRotate(final float pAngle) {
 		final float angleRad = MathUtils.degToRad(pAngle);
 
-		final float sin = FloatMath.sin(angleRad);
-		final float cos = FloatMath.cos(angleRad);
+		final float sin = (float)Math.sin(angleRad);
+		final float cos = (float)Math.cos(angleRad);
 
 		final float a = this.a;
 		final float b = this.b;
@@ -161,8 +161,8 @@ public class Transformation {
 	public void postRotate(final float pAngle) {
 		final float angleRad = MathUtils.degToRad(pAngle);
 
-		final float sin = FloatMath.sin(angleRad);
-		final float cos = FloatMath.cos(angleRad);
+		final float sin = (float)Math.sin(angleRad);
+		final float cos = (float)Math.cos(angleRad);
 
 		final float a = this.a;
 		final float b = this.b;
@@ -182,8 +182,8 @@ public class Transformation {
 	public Transformation setToRotate(final float pAngle) {
 		final float angleRad = MathUtils.degToRad(pAngle);
 
-		final float sin = FloatMath.sin(angleRad);
-		final float cos = FloatMath.cos(angleRad);
+		final float sin = (float)Math.sin(angleRad);
+		final float cos = (float)Math.cos(angleRad);
 
 		this.a = cos;
 		this.b = sin;

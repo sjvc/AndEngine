@@ -4,7 +4,7 @@ import java.util.Random;
 
 import org.anddev.andengine.util.constants.MathConstants;
 
-import android.util.FloatMath;
+
 
 /**
  * (c) 2010 Nicolas Gramlich 
@@ -152,8 +152,8 @@ public class MathUtils implements MathConstants {
 	public static float[] rotateAroundCenter(final float[] pVertices, final float pRotation, final float pRotationCenterX, final float pRotationCenterY) {
 		if(pRotation != 0) {
 			final float rotationRad = MathUtils.degToRad(pRotation);
-			final float sinRotationRad = FloatMath.sin(rotationRad);
-			final float cosRotationInRad = FloatMath.cos(rotationRad);
+			final float sinRotationRad = (float)Math.sin(rotationRad);
+			final float cosRotationInRad = (float)Math.cos(rotationRad);
 
 			for(int i = pVertices.length - 2; i >= 0; i -= 2) {
 				final float pX = pVertices[i];
@@ -205,7 +205,7 @@ public class MathUtils implements MathConstants {
 	public static float distance(final float pX1, final float pY1, final float pX2, final float pY2){
 		final float dX = pX2 - pX1;
 		final float dY = pY2 - pY1;
-		return FloatMath.sqrt((dX * dX) + (dY * dY));
+		return (float)Math.sqrt((dX * dX) + (dY * dY));
 	}
 
 	// ===========================================================
