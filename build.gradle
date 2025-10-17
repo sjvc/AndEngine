@@ -1,12 +1,13 @@
 buildscript {
     repositories {
+        google()
         mavenCentral()
         jcenter()
 
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:3.4.3'
     }
 }
 
@@ -14,6 +15,12 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 26
+
+    defaultConfig {
+        minSdkVersion 4
+    }
+
+    namespace 'org.anddev.andengine'
 
     sourceSets {
         main {
