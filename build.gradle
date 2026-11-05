@@ -2,11 +2,6 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.13.0'
     }
 }
 
@@ -31,5 +26,9 @@ android {
     defaultConfig {
         minSdk 23
         targetSdk 36
+    }
+
+    buildFeatures {
+        buildConfig true
     }
 }
